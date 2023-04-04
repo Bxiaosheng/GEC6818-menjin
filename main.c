@@ -6,40 +6,6 @@
 #include <sys/mman.h>
 #include <errno.h>
 #include <linux/input.h>  
-#include <stdio.h>//printf、scanf
-#include <termios.h>
-#include <sys/types.h>//open
-#include <sys/stat.h>//open
-#include <fcntl.h>//open
-#include <string.h>//bzero
-#include "uart.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/mman.h>
-
-#if 1
-	#define DEBUG printf("file is: %s, function is: %s, line is: %d\n\n", __FILE__, __FUNCTION__, __LINE__);
-#else
-	#define DEBUG
-#endif
-
-
-
-
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/mman.h>
-#include <errno.h>
-#include <linux/input.h>  
 
 #include <stdio.h>
 #include <string.h>
@@ -325,7 +291,7 @@ void password_fun(void)
 				sleep(2);
 				show_bmp("./2001.bmp");
        		 	keynum1=0;
-				eng=eng+1;
+				eng++;
 			 }
 		}
 		
@@ -504,7 +470,7 @@ int pic_mid_spread(char *pathname, int *pic_mid_spread_fd)
 
 
 
-//编译命令：arm-linux-gcc 触摸屏单点击_任务.c  uart.c
+//编译命令：arm-linux-gcc main.c  uart.c
 
 
 
@@ -664,7 +630,7 @@ int main()
 				{printf("密码错误，重新刷卡\n");
 					show_bmp(".sks.bmp");
 					sleep(1);
-					eng=eng+1;
+					eng++;
 					
 				}
 				
@@ -729,75 +695,7 @@ int main()
 	
 	
 	
-	
-	
-	
-	
-	
-	/*show_bmp("./2001.bmp");
-	//判断输入密码函数
-	password_fun();
-	while(1)
-	{
-		show_bmp("./123.bmp");
-		printf("请刷卡\n");
-		init_tty(fd_tty);
-	
-		//：这里是配置读卡器读取卡片信息的
-		send_A_command(fd_tty);//请求
 
-		//防碰撞
-	
-		card_id = send_B_command(fd_tty);
-	
-		//获取到了卡号（只作信息的获取）
-		printf("\nIC id: %#X\n", card_id);
-		//判断卡号是否为 标记的卡号 
-		if(card_id == 0X1C16866B)
-			{
-			//提示:这是正确的卡号
-			printf("这是正确的卡号\n");
-			show_bmp("./123.bmp");
-			break;
-			//显示一张图片提示
-		
-			}
-		else
-		{printf("密码错误，重新刷卡\n");
-		}
-		
-	}
-	
-	printf("进入系统\n");
-	show_bmp("./985.bmp");
-	
-	while(1)
-	{
-		//读触摸屏的触摸数值,拿取x\y轴坐标值数据
-		touch_lcd();	//调用一次函数，获取一次触摸数据
-		
-		printf("单次点击坐标点为：(%d , %d)\n", x, y);
-		
-		if(x>0 && x < 100 && y >0 && y<100)
-		{
-			printf("点击了左上角\n");
-			//显示指定路径的图片
-			
-		}
-		if(x>0 && x < 100 && y >380 && y<480)
-		{
-			printf("点击了左下角\n");
-		}
-		if(x>700 && x < 800 && y >0 && y<100)
-		{
-			printf("点击了右上角\n");
-		}
-		if(x>700 && x < 800 && y >380 && y<480)
-		{
-			printf("点击了右下角\n");
-		}
-	}
-	*/
 
 	//解除映射内存
 	munmap(lcd_fp, 800*480*4);	//内存空间800*480*4总字节
